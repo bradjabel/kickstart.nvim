@@ -44,6 +44,12 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- BRAD: Start
+vim.wo.relativenumber = true
+-- keeps cursor centered when moving up and down the buffer
+vim.o.scrolloff = 999
+-- BRAD: End
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -67,6 +73,12 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
+  -- BRAD: Start
+  'tpope/vim-vinegar',
+  'tpope/vim-surround',
+  'tpope/vim-repeat',
+  -- BRAD: End
+
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
@@ -266,7 +278,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
