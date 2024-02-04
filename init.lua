@@ -46,8 +46,6 @@ vim.g.maplocalleader = ' '
 
 -- BRAD: Start
 vim.wo.relativenumber = true
--- keeps cursor centered when moving up and down the buffer
-vim.o.scrolloff = 999
 -- BRAD: End
 
 -- [[ Install `lazy.nvim` plugin manager ]]
