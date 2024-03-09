@@ -237,7 +237,7 @@ require('lazy').setup {
     end
   },
   -- BRAD: End
-  
+
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
@@ -562,6 +562,20 @@ require('lazy').setup {
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        svelte = {
+          on_attach = function(client)
+            if client.name == 'svelte' then
+              vim.api.nvim_create_autocmd('BufWritePost', {
+                pattern = { '*.js', '*.ts' },
+                group = vim.api.nvim_create_augroup('svelte_lsp', { clear = true }),
+                callback = function(ctx)
+                  print(ctx.match)
+                  client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
+                end,
+              })
+            end
+          end,
+        },
 
         lua_ls = {
           -- cmd = {...},
