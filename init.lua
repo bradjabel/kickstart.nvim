@@ -565,7 +565,6 @@ require('lazy').setup({
                 pattern = { '*.js', '*.ts' },
                 group = vim.api.nvim_create_augroup('svelte_lsp', { clear = true }),
                 callback = function(ctx)
-                  print(ctx.match)
                   client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
                 end,
               })
