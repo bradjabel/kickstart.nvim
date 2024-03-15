@@ -540,6 +540,7 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
+        bashls = {},
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
@@ -600,6 +601,7 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
+        'prettierd',
         'stylua', -- Used to format lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -634,8 +636,8 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        javascript = { { 'prettier' } },
-        typescript = { { 'prettier' } },
+        javascript = { { 'prettierd' } },
+        typescript = { { 'prettierd' } },
       },
     },
   },
@@ -844,13 +846,13 @@ require('lazy').setup({
   'tpope/vim-surround',
   'tpope/vim-repeat',
   {
-    "ggandor/leap.nvim",
-    dependencies = { "tpope/vim-repeat" },
+    'ggandor/leap.nvim',
+    dependencies = { 'tpope/vim-repeat' },
     config = function()
       -- -help leap-custom-mappings to find more
-      vim.keymap.set({ 'n' }, 's', '<Plug>(leap-forward)');
-      vim.keymap.set({ 'n' }, '\\', '<Plug>(leap-backward)');
-    end
+      vim.keymap.set({ 'n' }, 's', '<Plug>(leap-forward)')
+      vim.keymap.set({ 'n' }, '\\', '<Plug>(leap-backward)')
+    end,
   },
   -- BRAD: End
 }, {
