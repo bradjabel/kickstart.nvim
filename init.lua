@@ -95,7 +95,7 @@ vim.wo.relativenumber = true
 -- BRAD: End
 
 -- Set to true if you have a Nerd Font installed
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
