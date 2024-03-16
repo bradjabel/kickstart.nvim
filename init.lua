@@ -554,13 +554,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {
-          settings = {
-            completions = {
-              completeFunctionCalls = true,
-            },
-          },
-        },
+        -- tsserver = {},
         --
         svelte = {
           on_attach = function(client)
@@ -865,23 +859,8 @@ require('lazy').setup({
   --    This is the easiest way to modularize your config.
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
-
-  -- BRAD: Start
-  'tpope/vim-vinegar',
-  'tpope/vim-surround',
-  'tpope/vim-repeat',
-  {
-    'ggandor/leap.nvim',
-    dependencies = { 'tpope/vim-repeat' },
-    config = function()
-      -- -help leap-custom-mappings to find more
-      vim.keymap.set({ 'n' }, 's', '<Plug>(leap-forward)')
-      vim.keymap.set({ 'n' }, '\\', '<Plug>(leap-backward)')
-    end,
-  },
-  -- BRAD: End
+  --  For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
+  { import = 'custom.plugins' },
 }, {
   ui = {
     -- If you have a Nerd Font, set icons to an empty table which will use the
