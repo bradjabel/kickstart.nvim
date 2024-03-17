@@ -598,8 +598,10 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
+        'fixjson',
         'prettierd',
         'stylua', -- Used to format lua code
+        'sql-formatter',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -640,7 +642,9 @@ require('lazy').setup({
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         javascript = { { 'prettierd' } },
+        json = { 'fixjson' },
         typescript = { { 'prettierd' } },
+        sql = { 'sql_formatter' },
       },
     },
   },
