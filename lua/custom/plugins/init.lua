@@ -4,6 +4,4 @@
 -- See the kickstart.nvim README for more information
 return {
   'tpope/vim-vinegar',
-  'tpope/vim-surround',
-  'tpope/vim-repeat',
 }
