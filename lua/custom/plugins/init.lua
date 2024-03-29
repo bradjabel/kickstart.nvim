@@ -3,6 +3,5 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  'tpope/vim-vinegar',
   'dstein64/vim-startuptime',
 }
