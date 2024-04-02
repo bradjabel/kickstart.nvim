@@ -583,7 +583,11 @@ require('lazy').setup({
             },
           },
         },
+
+        templ = {},
       }
+
+      vim.filetype.add { extension = { templ = 'templ' } }
 
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
@@ -825,14 +829,16 @@ require('lazy').setup({
       --  Check out: https://github.com/echasnovski/mini.nvim
 
       require('mini.files').setup()
-      vim.keymap.set('n', '-', require('mini.files').open, { desc = 'Open mini.files' })
+      vim.keymap.set('n', '-', function()
+        require('mini.files').open(vim.api.nvim_buf_get_name(0))
+      end, { desc = 'Open mini.files' })
     end,
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'go', 'templ' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
