@@ -982,3 +982,63 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+-- Custom User Commands
+
+local function starts_with(str, prefix)
+  return str:sub(1, #prefix) == prefix
+end
+
+local function get_next_filename(options)
+  -- Define default values
+  local default_options = {
+    name = 'scratch',
+    suffix = 'json',
+  }
+
+  -- Merge options with default_options
+  options = options or {}
+  for k, v in pairs(default_options) do
+    options[k] = options[k] or v
+  end
+
+  local count = 0
+
+  -- Iterate through each buffer in Neovim
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    local name = vim.api.nvim_buf_get_name(buf)
+
+    if starts_with(name:match '^.+/(.+)$' or name, options.name) then
+      count = count + 1
+    end
+  end
+
+  return options.name .. '-' .. count .. '.' .. options.suffix
+end
+
+-- Run with `:RunNodeFile query.js %:S` to:
+-- - run node on the current buffer file
+-- - open a vertical split with the filename scratch-##.json where ## is the latest
+-- - paste clipboard contents to the split
+vim.api.nvim_create_user_command('RunNodeFile', function(input)
+  -- TODO:
+  -- - look for buffer with name first
+  -- - if buffer exists, overwrite that buffer with the contents
+  -- - or do we just not want it to create new splits and instead take over the right most
+
+  vim.api.nvim_command(':!node ' .. input.args)
+  vim.api.nvim_command ':vnew'
+
+  -- Switch to the new buffer
+  local buf = vim.api.nvim_get_current_buf()
+
+  vim.api.nvim_buf_set_name(buf, get_next_filename())
+  vim.api.nvim_set_current_buf(buf)
+
+  vim.api.nvim_set_option_value('filetype', vim.filetype.match { buf = buf } or 'json', { scope = 'local' })
+
+  -- Paste the clipboard contents into the new buffer
+  vim.api.nvim_command 'normal! "*p'
+
+  require('conform').format { async = true, lsp_fallback = true }
+end, { nargs = '*' })
