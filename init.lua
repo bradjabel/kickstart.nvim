@@ -614,19 +614,19 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
-        svelte = {
-          on_attach = function(client)
-            if client.name == 'svelte' then
-              vim.api.nvim_create_autocmd('BufWritePost', {
-                pattern = { '*.js', '*.ts' },
-                group = vim.api.nvim_create_augroup('svelte_lsp', { clear = true }),
-                callback = function(ctx)
-                  client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
-                end,
-              })
-            end
-          end,
-        },
+        -- svelte = {
+        --   on_attach = function(client)
+        --     if client.name == 'svelte' then
+        --       vim.api.nvim_create_autocmd('BufWritePost', {
+        --         pattern = { '*.js', '*.ts' },
+        --         group = vim.api.nvim_create_augroup('svelte_lsp', { clear = true }),
+        --         callback = function(ctx)
+        --           client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
+        --         end,
+        --       })
+        --     end
+        --   end,
+        -- },
 
         lua_ls = {
           -- cmd = {...},
@@ -696,14 +696,14 @@ require('lazy').setup({
       },
     },
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
         local disable_filetypes = { c = true, cpp = true }
         return {
-          timeout_ms = 500,
+          timeout_ms = 2000,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
         }
       end,
@@ -714,10 +714,11 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        javascript = { { 'prettierd' } },
+        javascript = { { 'prettierd', 'prettier', stop_after_first = true } },
         json = { 'fixjson' },
-        typescript = { { 'prettierd' } },
+        typescript = { { 'prettierd', 'prettier', stop_after_first = true } },
         sql = { 'sql_formatter' },
+        html = { 'prettierd' },
       },
     },
   },
