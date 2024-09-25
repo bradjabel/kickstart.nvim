@@ -671,15 +671,6 @@ require('lazy').setup({
         --   end,
         -- },
 
-        denols = {
-          root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
-        },
-
-        tsserver = {
-          root_dir = nvim_lsp.util.root_pattern 'package.json',
-          single_file_support = false,
-        },
-
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
