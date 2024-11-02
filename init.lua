@@ -1047,6 +1047,11 @@ require('lazy').setup({
 
 -- Custom User Commands
 
+vim.keymap.set('n', '<leader>lr', function()
+  vim.api.nvim_command 'LspStop'
+  vim.api.nvim_command 'LspStart'
+end, { desc = 'Reset LSP' })
+
 local function starts_with(str, prefix)
   return str:sub(1, #prefix) == prefix
 end
