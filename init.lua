@@ -645,6 +645,15 @@ require('lazy').setup({
 
       local servers = {
         bashls = {},
+        tsserver = {
+          settings = {
+            diagnostics = {
+              -- ignore Could not find a declaration file for module error
+              -- https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json#L6657C6-L6657C50
+              ignoredCodes = { 7016 },
+            },
+          },
+        },
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
