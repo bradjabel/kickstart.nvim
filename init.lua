@@ -786,7 +786,7 @@ require('lazy').setup({
         typescript = { { 'prettierd', 'prettier', stop_after_first = true } },
         sql = { 'sql_formatter' },
         html = { 'prettierd' },
-        svelte = { { 'prettier' } },
+        svelte = { { 'prettierd', 'prettier', stop_after_first = true } },
       },
     },
   },
