@@ -654,7 +654,7 @@ require('lazy').setup({
 
       local servers = {
         bashls = {},
-        tsserver = {
+        ts_ls = {
           settings = {
             diagnostics = {
               -- ignore Could not find a declaration file for module error
