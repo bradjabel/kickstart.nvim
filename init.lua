@@ -703,11 +703,7 @@ require('lazy').setup({
             },
           },
         },
-
-        templ = {},
       }
-
-      vim.filetype.add { extension = { templ = 'templ' } }
 
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
