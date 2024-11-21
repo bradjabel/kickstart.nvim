@@ -720,7 +720,7 @@ require('lazy').setup({
         'fixjson',
         'prettierd',
         'stylua', -- Used to format Lua code
-        'sql-formatter',
+        'sqlfmt',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -780,7 +780,7 @@ require('lazy').setup({
         javascript = { { 'prettierd', 'prettier', stop_after_first = true } },
         json = { 'fixjson' },
         typescript = { { 'prettierd', 'prettier', stop_after_first = true } },
-        sql = { 'sql_formatter' },
+        sql = { 'sqlfmt' },
         html = { 'prettierd' },
         svelte = { { 'prettierd', 'prettier', stop_after_first = true } },
       },
