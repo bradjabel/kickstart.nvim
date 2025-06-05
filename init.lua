@@ -677,19 +677,19 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
-        -- svelte = {
-        --   on_attach = function(client)
-        --     if client.name == 'svelte' then
-        --       vim.api.nvim_create_autocmd('BufWritePost', {
-        --         pattern = { '*.js', '*.ts' },
-        --         group = vim.api.nvim_create_augroup('svelte_lsp', { clear = true }),
-        --         callback = function(ctx)
-        --           client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
-        --         end,
-        --       })
-        --     end
-        --   end,
-        -- },
+        svelte = {
+          on_attach = function(client)
+            if client.name == 'svelte' then
+              vim.api.nvim_create_autocmd('BufWritePost', {
+                pattern = { '*.js', '*.ts' },
+                group = vim.api.nvim_create_augroup('svelte_lsp', { clear = true }),
+                callback = function(ctx)
+                  client.notify('$/onDidChangeTsOrJsFile', { uri = ctx.match })
+                end,
+              })
+            end
+          end,
+        },
 
         lua_ls = {
           -- cmd = { ... },
